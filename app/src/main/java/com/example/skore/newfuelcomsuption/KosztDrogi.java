@@ -1,5 +1,6 @@
 package com.example.skore.newfuelcomsuption;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,14 +11,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by skore on 09.04.2018.
  */
 
 public class KosztDrogi extends Fragment{
-    Button powrot, oblCene;
+    Button  oblCene;
     TextView wynik;
-    EditText km, spalone,zaLitr;
+    EditText km, spalone, zaLitr;
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     double wynikCena;
     @Nullable
@@ -30,7 +35,7 @@ public class KosztDrogi extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        powrot = (Button) view.findViewById(R.id.powrotCena);
+
         oblCene = (Button) view.findViewById(R.id.obliczCene);
         wynik = (TextView) view.findViewById(R.id.wynikCena);
         km = (EditText) view.findViewById(R.id.iloscPrzejechanychKilometrów);
@@ -38,6 +43,7 @@ public class KosztDrogi extends Fragment{
         zaLitr = (EditText) view.findViewById(R.id.cenaZaLitr);
 
         view.findViewById(R.id.obliczCene).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
 
@@ -45,8 +51,9 @@ public class KosztDrogi extends Fragment{
                 double SpalonePaliwo = Double.parseDouble(spalone.getText().toString());
                 double CenaZaLitr = Double.parseDouble(zaLitr.getText().toString());
                 wynikCena = SpalonePaliwo*(przeKM/100)*CenaZaLitr;
+                double wynikCenaFormat = Double.valueOf(decimalFormat.format(wynikCena));
 
-               wynik.setText(Double.toString(wynikCena));
+               wynik.setText(wynikCenaFormat + " zł");
             }
         });
     }
