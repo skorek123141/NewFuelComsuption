@@ -1,21 +1,27 @@
 package com.example.skore.newfuelcomsuption;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoriaFragment extends Fragment {
-    DatabaseHelper myDB;
+    ListView lv;
+    DatabaseHelper databaseHelper;
+    CustomAdapter customAdapter;
+    ArrayList<Model> listModel;
 
     @Nullable
     @Override
@@ -26,22 +32,18 @@ public class HistoriaFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myDB = new DatabaseHelper(getActivity());
-        ListView listView = (ListView)view.findViewById(R.id.listview);
 
-        ArrayList<String> thelist = new ArrayList<>();
-        Cursor data = myDB.getListContenst();
+        databaseHelper = new DatabaseHelper(getActivity());
+        lv = (ListView) view.findViewById(R.id.listview);
+        listModel = new ArrayList<Model>();
+        listModel.addAll(databaseHelper.getModels());
+        customAdapter = new CustomAdapter(getActivity(),R.layout.custom_adapter, listModel);
+        lv.setAdapter(customAdapter);
 
-        if(data.getCount() ==0){
-            Toast.makeText(getActivity(), "Musisz dodać coś do swojej bazy!", Toast.LENGTH_SHORT).show();
-        }else{
-            while(data.moveToNext()){
-                thelist.add(data.getString(1));
-                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, thelist);
-                listView.setAdapter(listAdapter);
-            }
-        }
+
 
 
     }
+
+
 }
