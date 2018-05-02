@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDB.rawQuery(SELECT_PEOPLE, null);
         cursor.moveToNext();
         for (int i = 0; i <cursor.getCount() ; i++) {
-            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
+            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
             cursor.moveToNext();
         }
         cursor.close();
@@ -88,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String s = "SELECT * FROM" + TABLE_NAME + "WHERE " + ID + "=" + id;
         Cursor cursor = sqLiteDB.rawQuery(s,null);
         cursor.moveToFirst();
-        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
         cursor.close () ;
         sqLiteDB.close () ;
         return model ;
