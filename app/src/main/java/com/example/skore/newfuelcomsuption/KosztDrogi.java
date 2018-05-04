@@ -43,17 +43,16 @@ public class KosztDrogi extends Fragment{
         zaLitr = (EditText) view.findViewById(R.id.cenaZaLitr);
 
         view.findViewById(R.id.obliczCene).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
             public void onClick(View view) {
 
-                double przeKM = Double.parseDouble(km.getText().toString());
-                double SpalonePaliwo = Double.parseDouble(spalone.getText().toString());
-                double CenaZaLitr = Double.parseDouble(zaLitr.getText().toString());
+                double przeKM = Double.valueOf(km.getText().toString());
+                Double SpalonePaliwo = Double.valueOf(spalone.getText().toString());
+                Double CenaZaLitr = Double.parseDouble(zaLitr.getText().toString());
                 wynikCena = SpalonePaliwo*(przeKM/100)*CenaZaLitr;
-                double wynikCenaFormat = Double.valueOf(decimalFormat.format(wynikCena));
 
-               wynik.setText(wynikCenaFormat + " zł");
+               wynik.setText(String.valueOf(String.format("%.2f", wynikCena)) + " zł");
             }
         });
     }

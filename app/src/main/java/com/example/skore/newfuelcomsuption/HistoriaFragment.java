@@ -1,5 +1,6 @@
 package com.example.skore.newfuelcomsuption;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
@@ -41,9 +42,11 @@ public class HistoriaFragment extends Fragment {
         lv.setAdapter(customAdapter);
 
 
-
-
     }
+
+
+
+
 
 
 }

@@ -8,10 +8,11 @@ public class Model {
     private String avg;
     private String data;
 
-    public Model(int id, String amount_km, String avg, String data) {
+    public Model(int id, String amount_km, String amount_fuel, String avg, String data) {
         this.id = id;
         this.amount_km = amount_km;
         this.avg = avg;
+        this.amount_fuel = amount_fuel;
         this.data = data;
     }
 

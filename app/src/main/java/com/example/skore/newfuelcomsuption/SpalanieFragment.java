@@ -29,7 +29,7 @@ public class SpalanieFragment extends Fragment {
 
     double wynikAVG;
     DatabaseHelper myDB;
-    DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     @Nullable
     @Override
@@ -50,21 +50,15 @@ public class SpalanieFragment extends Fragment {
         km = (EditText) view.findViewById(R.id.editText_amount_km);
         spalone = (EditText) view.findViewById(R.id.editText_amount_fuel);
 
-
-
-
-
-
         view.findViewById(R.id.btnOblicz).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
             public void onClick(View view) {
 
-                double prze = Double.parseDouble(km.getText().toString());
-                double spalonePaliwo = Double.parseDouble(spalone.getText().toString());
+                double prze = Double.valueOf(km.getText().toString());
+                double spalonePaliwo = Double.valueOf(spalone.getText().toString());
                 wynikAVG = (spalonePaliwo/prze*100);
-                double wynikAvgFormat = Double.valueOf(decimalFormat.format(wynikAVG));
-                wynikAvg.setText(wynikAvgFormat+ " l/100km.");
+                wynikAvg.setText( String.valueOf(String.format("%.2f", wynikAVG))+ " l/100km.");
 
                 Toast.makeText(getActivity(), "You are inside Średnie spalanie Fragment", Toast.LENGTH_SHORT).show();
 
@@ -78,12 +72,13 @@ public class SpalanieFragment extends Fragment {
                 double prze = Double.parseDouble(km.getText().toString());
                 double spalonePaliwo = Double.parseDouble(spalone.getText().toString());
                 wynikAVG = (spalonePaliwo/prze*100);
-                double wynikAvgFormat = Double.valueOf(decimalFormat.format(wynikAVG));
+
+
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
 
-                boolean isInserted = myDB.insertData(km.getText().toString() , spalone.getText().toString(), wynikAvgFormat);
+                boolean isInserted = myDB.insertData(km.getText().toString() , spalone.getText().toString(), wynikAVG);
                 if (isInserted) {
                     Toast.makeText(getActivity(), " Zapisane", Toast.LENGTH_LONG).show();
                 }else{

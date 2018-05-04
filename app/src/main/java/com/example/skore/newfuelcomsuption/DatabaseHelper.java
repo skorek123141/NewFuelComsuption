@@ -63,34 +63,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void removeData(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + ID + " =\"" + id + "\";");
+        db.close();
+    }
+
+    public ArrayList<Model> getModels() {
+        ArrayList<Model> model = new ArrayList<Model>();
+        mDatabase = this.getReadableDatabase();
+        Cursor cursor = mDatabase.rawQuery(SELECT_PEOPLE, null);
+        cursor.moveToNext();
+        for (int i = 0; i <cursor.getCount() ; i++) {
+            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        mDatabase.close();
+        return model;
+    }
+    public Model getModel(int id){
+        mDatabase = this.getReadableDatabase();
+        String s = "SELECT * FROM" + TABLE_NAME + "WHERE " + ID + "=" + id;
+        Cursor cursor = mDatabase.rawQuery(s,null);
+        cursor.moveToFirst();
+        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+        cursor.close () ;
+        mDatabase.close () ;
+        return model ;
     }
     private String getNow(){
         // set the format to sql date time
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
-    }
-    public ArrayList<Model> getModels() {
-        ArrayList<Model> model = new ArrayList<Model>();
-        SQLiteDatabase sqLiteDB = databaseHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDB.rawQuery(SELECT_PEOPLE, null);
-        cursor.moveToNext();
-        for (int i = 0; i <cursor.getCount() ; i++) {
-            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        sqLiteDB.close();
-        return model;
-    }
-    public Model getModel(int id){
-        SQLiteDatabase sqLiteDB = databaseHelper.getReadableDatabase();
-        String s = "SELECT * FROM" + TABLE_NAME + "WHERE " + ID + "=" + id;
-        Cursor cursor = sqLiteDB.rawQuery(s,null);
-        cursor.moveToFirst();
-        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3));
-        cursor.close () ;
-        sqLiteDB.close () ;
-        return model ;
     }
 }

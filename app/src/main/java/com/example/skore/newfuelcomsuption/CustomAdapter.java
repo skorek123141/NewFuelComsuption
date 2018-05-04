@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,11 +43,16 @@ public class CustomAdapter extends BaseAdapter {
         TextView ID = (TextView) v.findViewById(R.id.textViewID);
         TextView przejechane = (TextView) v.findViewById(R.id.textViewPrzejechane);
         TextView spalone = (TextView) v.findViewById(R.id.textViewSpalanie);
+        TextView zuzytePaliwo = (TextView) v.findViewById(R.id.textViewUzytepaliwo);
         TextView dataView = (TextView) v.findViewById(R.id.textViewData);
+        Button btnDelete = (Button) v.findViewById(R.id.btnDelete);
         ID.setText(String.valueOf( mModel.get(position).getId()));
         przejechane.setText(String.valueOf( mModel.get(position).getAmount_km()));
-        spalone.setText(String.valueOf( mModel.get(position).getAmount_fuel()));
+        spalone.setText(String.valueOf( mModel.get(position).getAvg()));
+        zuzytePaliwo.setText(String.valueOf( mModel.get(position).getAmount_fuel()));
         dataView.setText(String.valueOf( mModel.get(position).getData()));
+
+
 
         return v;
     }
