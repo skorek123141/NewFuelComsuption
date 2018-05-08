@@ -1,6 +1,7 @@
 package com.example.skore.newfuelcomsuption;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,7 +42,6 @@ public class HistoriaFragment extends Fragment {
         listModel.addAll(databaseHelper.getModels());
         customAdapter = new CustomAdapter(getActivity(),R.layout.custom_adapter, listModel);
         lv.setAdapter(customAdapter);
-
 
     }
 

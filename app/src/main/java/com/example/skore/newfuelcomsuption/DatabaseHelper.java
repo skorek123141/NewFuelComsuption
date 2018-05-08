@@ -18,7 +18,6 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase mDatabase;
-    DatabaseHelper databaseHelper;
     public static final String DATABASE_NAME = "AvgFuel.db";
     public static final String TABLE_NAME = "avgFuel_table";
 
@@ -33,6 +32,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
 
     }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -61,8 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
     public void removeData(int id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + ID + " =\"" + id + "\";");
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_NAME, ID + "=" + id , null);
         db.close();
     }
 
