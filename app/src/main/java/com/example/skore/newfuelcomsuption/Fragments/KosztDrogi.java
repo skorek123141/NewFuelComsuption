@@ -1,4 +1,4 @@
-package com.example.skore.newfuelcomsuption;
+package com.example.skore.newfuelcomsuption.Fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.skore.newfuelcomsuption.R;
 
 import java.text.DecimalFormat;
 

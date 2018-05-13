@@ -56,6 +56,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView przejechane = (TextView) v.findViewById(R.id.textViewPrzejechane);
         TextView spalone = (TextView) v.findViewById(R.id.textViewSpalanie);
         TextView zuzytePaliwo = (TextView) v.findViewById(R.id.textViewUzytepaliwo);
+        TextView typeOfRoad = (TextView) v.findViewById(R.id.textTypeOfRoad);
         final TextView dataView = (TextView) v.findViewById(R.id.textViewData);
         final Button btnDelete = (Button) v.findViewById(R.id.btnDelete);
         final ListView listView = (ListView) v.findViewById(R.id.listview);
@@ -63,6 +64,7 @@ public class CustomAdapter extends BaseAdapter {
         przejechane.setText(String.valueOf( mModel.get(position).getAmount_km()));
         spalone.setText(String.valueOf( mModel.get(position).getAvg()));
         zuzytePaliwo.setText(String.valueOf( mModel.get(position).getAmount_fuel()));
+        typeOfRoad.setText(String.valueOf(mModel.get(position).getType_of_road()));
         dataView.setText(String.valueOf( mModel.get(position).getData()));
 
 

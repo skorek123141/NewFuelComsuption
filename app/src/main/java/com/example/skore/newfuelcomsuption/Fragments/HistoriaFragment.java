@@ -1,4 +1,4 @@
-package com.example.skore.newfuelcomsuption;
+package com.example.skore.newfuelcomsuption.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,6 +14,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.skore.newfuelcomsuption.CustomAdapter;
+import com.example.skore.newfuelcomsuption.DatabaseHelper;
+import com.example.skore.newfuelcomsuption.Model;
+import com.example.skore.newfuelcomsuption.R;
 
 import java.io.IOException;
 import java.io.InputStream;

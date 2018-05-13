@@ -25,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String AMOUNT_FUEL = "AMOUNT_FUEL";
     public static final String AMOUNT_KM = "AMOUNT_KM";
     public static final String AVG = "AVG";
+    public static final String TYPE_OF_ROAD = "TYPE_OF_ROAD";
     public static final String DATA = "DATA";
     private static final String SELECT_PEOPLE = "SELECT * FROM " + TABLE_NAME;
 
@@ -38,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                AMOUNT_FUEL + " REAL, " + AMOUNT_KM + " REAL, " + AVG + " REAL, " + DATA + " TEXT" + ");");
+                AMOUNT_FUEL + " REAL, " + AMOUNT_KM + " REAL, " + AVG + " REAL, " + TYPE_OF_ROAD + " TEXT, " + DATA + " TEXT" + ");");
 
     }
 
@@ -48,12 +49,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String amount_fuel, String amount_km, double avg){
+    public boolean insertData(String amount_fuel, String amount_km, double avg, String type_of_road){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(AMOUNT_FUEL,amount_fuel);
         contentValues.put(AMOUNT_KM,amount_km);
         contentValues.put(AVG,avg);
+        contentValues.put(TYPE_OF_ROAD,type_of_road);
         contentValues.put(DATA,getNow());
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
@@ -73,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = mDatabase.rawQuery(SELECT_PEOPLE, null);
         cursor.moveToNext();
         for (int i = 0; i <cursor.getCount() ; i++) {
-            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
+            model.add(new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5)));
             cursor.moveToNext();
         }
         cursor.close();
@@ -85,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String s = "SELECT * FROM" + TABLE_NAME + "WHERE " + ID + "=" + id;
         Cursor cursor = mDatabase.rawQuery(s,null);
         cursor.moveToFirst();
-        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+        Model model = new Model(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4), cursor.getString(5));
         cursor.close () ;
         mDatabase.close () ;
         return model ;

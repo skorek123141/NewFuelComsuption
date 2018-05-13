@@ -102,6 +102,27 @@
                 android:text="Średnie spalanie"
                 android:textColor="#000" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Rodzaj trasy"
+                android:textColor="#000" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textTypeOfRoad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rodzaj trasy"
+                android:textColor="#000" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
